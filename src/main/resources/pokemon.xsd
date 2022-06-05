@@ -1,0 +1,115 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://pokemon/challenge/bankaya-web-service"
+           targetNamespace="http://pokemon/challenge/bankaya-web-service" elementFormDefault="qualified">
+
+    <!-- *********************************** getAbilitiesRequest ***********************************  -->
+    <xs:element name="getAbilitiesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAbilitiesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="generalResponse" type="tns:generalResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- *********************************** getBaseExperienceRequest ***********************************  -->
+    <xs:element name="getBaseExperienceRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getBaseExperienceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="generalResponse" type="tns:generalResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- *********************************** getHeldItemsRequest ***********************************  -->
+    <xs:element name="getHeldItemsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getHeldItemsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="generalResponse" type="tns:generalResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- *********************************** getIdRequest ***********************************  -->
+    <xs:element name="getIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="generalResponse" type="tns:generalResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- *********************************** getNameRequest ***********************************  -->
+    <xs:element name="getNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="generalResponse" type="tns:generalResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- *********************************** getNameRequest ***********************************  -->
+    <xs:element name="getLocationAreaEncountersRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getLocationAreaEncountersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="generalResponse" type="tns:generalResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- *********************************** generalResponse ***********************************  -->
+    <xs:complexType name="generalResponse">
+        <xs:sequence>
+            <xs:element name="code" type="xs:int"/>
+            <xs:element name="mensaje" type="xs:string"/>
+            <xs:element name="response" type="xs:anyType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

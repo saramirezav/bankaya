@@ -18,7 +18,7 @@ public class ClientUtil {
     PokemonClient pokemonClient;
 
     /**
-     * Call REST API https://pokeapi.co/api/v2/pokemon/{name}
+     * Calls REST API https://pokeapi.co/api/v2/pokemon/{name}
      * @param name
      * @return datos (JSONObject)
      */

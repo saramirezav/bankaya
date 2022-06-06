@@ -2,6 +2,7 @@ package com.mx.bankaya.challenge.service;
 
 import com.mx.bankaya.challenge.client.LocationAreaEncountersClient;
 import com.mx.bankaya.challenge.constants.AttributeConstant;
+import com.mx.bankaya.challenge.repository.IRequestRepository;
 import com.mx.bankaya.challenge.utils.ClientUtil;
 import com.mx.bankaya.challenge.utils.InformationUtil;
 import org.json.JSONArray;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Sarahy Ramirez
  */
 @Service
-public class PokemonService implements IPokemonService{
+public class PokemonServiceImpl implements IPokemonService{
 
     @Autowired
     ClientUtil clientUtil;
@@ -26,6 +27,9 @@ public class PokemonService implements IPokemonService{
 
     @Autowired
     LocationAreaEncountersClient locationAreaEncountersClient;
+
+    @Autowired
+    IRequestRepository iRequestRepository;
 
     /**
      * Gets the information according to the attribute

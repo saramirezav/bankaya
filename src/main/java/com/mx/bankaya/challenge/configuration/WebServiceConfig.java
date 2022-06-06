@@ -1,5 +1,6 @@
 package com.mx.bankaya.challenge.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -7,10 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
+
+import java.util.List;
 
 /**
  * Configuration Class that receives the SOAP request
@@ -19,6 +23,9 @@ import org.springframework.xml.xsd.XsdSchema;
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
+
+    @Autowired
+    private InterceptorEndpoint interceptorEndpoint;
 
     /**
      * Handles SOAP request
@@ -55,5 +62,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean
     public XsdSchema pokemonSchema() {
         return new SimpleXsdSchema(new ClassPathResource("pokemon.xsd"));
+    }
+
+    /**
+     * Register a global interceptor
+     * @param interceptors
+     */
+    @Override
+    public void addInterceptors(List<EndpointInterceptor> interceptors) {
+        interceptors.add(interceptorEndpoint);
     }
 }

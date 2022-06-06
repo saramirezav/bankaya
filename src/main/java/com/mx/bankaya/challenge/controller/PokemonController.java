@@ -1,16 +1,14 @@
 package com.mx.bankaya.challenge.controller;
 
-import com.mx.bankaya.challenge.beans.GeneralResponse;
-import com.mx.bankaya.challenge.beans.PokemonRequest;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import com.mx.bankaya.challenge.service.IPokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import pokemon.challenge.bankaya_web_service.*;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
+import java.util.List;
 
 @Endpoint
 public class PokemonController {
@@ -22,53 +20,84 @@ public class PokemonController {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAbilitiesRequest")
     @ResponsePayload
-    public JAXBElement<GeneralResponse>getAbilities(@RequestPayload JAXBElement<PokemonRequest> request) {
-        String abilities= iPokemonService.getInformation(request.getValue().getName().toLowerCase(), "abilities").toString();
-        GeneralResponse generalResponse= new GeneralResponse(200, "Consulta exitosa", abilities);
-        return createJaxbElement(generalResponse, GeneralResponse.class);
+    public GetAbilitiesResponse getAbilities(@RequestPayload GetAbilitiesRequest request) {
+
+        List<String> abilities= (List<String>) iPokemonService.getInformation(request.getName().toLowerCase(), "abilities");
+
+        GetAbilitiesResponse getAbilitiesResponse= new GetAbilitiesResponse();
+
+        for (String ability: abilities) {
+            getAbilitiesResponse.getAbility().add(ability);
+        }
+
+        return getAbilitiesResponse;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getBaseExperienceRequest")
     @ResponsePayload
-    public JAXBElement<GeneralResponse> getBaseExperience(@RequestPayload JAXBElement<PokemonRequest> request) {
-        int base_experience = Integer.valueOf(iPokemonService.getInformation(request.getValue().getName().toLowerCase(), "base_experience").toString());
-        GeneralResponse generalResponse= new GeneralResponse(200, "Consulta exitosa", base_experience);
-        return createJaxbElement(generalResponse, GeneralResponse.class);
+    public GetBaseExperienceResponse getBaseExperience(@RequestPayload GetBaseExperienceRequest request) {
+
+        int base_experience = Integer.valueOf(iPokemonService.getInformation(request.getName().toLowerCase(), "base_experience").toString());
+
+        GetBaseExperienceResponse getBaseExperienceResponse = new GetBaseExperienceResponse();
+        getBaseExperienceResponse.setBaseExperience(base_experience);
+
+        return getBaseExperienceResponse;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getHeldItemsRequest")
     @ResponsePayload
-    public JAXBElement<GeneralResponse> getHeldItems(@RequestPayload JAXBElement<PokemonRequest> request) {
-        String held_items= iPokemonService.getInformation(request.getValue().getName().toLowerCase(), "held_items").toString();
-        GeneralResponse generalResponse= new GeneralResponse(200, "Consulta exitosa", held_items);
-        return createJaxbElement(generalResponse, GeneralResponse.class);
+    public GetHeldItemsResponse getHeldItems(@RequestPayload GetHeldItemsRequest request) {
+
+        List<String> held_items= (List<String>) iPokemonService.getInformation(request.getName().toLowerCase(), "held_items");
+
+        GetHeldItemsResponse getHeldItemsResponse = new GetHeldItemsResponse();
+
+       for (String item: held_items) {
+           getHeldItemsResponse.getHeldItem().add(item);
+       }
+
+        return getHeldItemsResponse;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getIdRequest")
     @ResponsePayload
-    public JAXBElement<GeneralResponse> getId(@RequestPayload JAXBElement<PokemonRequest> request) {
-        int id = Integer.valueOf(iPokemonService.getInformation(request.getValue().getName().toLowerCase(), "id").toString());
-        GeneralResponse generalResponse= new GeneralResponse(200, "Consulta exitosa", id);
-        return createJaxbElement(generalResponse, GeneralResponse.class);
+    public GetIdResponse getId(@RequestPayload GetIdRequest request) {
+
+        int id = Integer.valueOf(iPokemonService.getInformation(request.getName().toLowerCase(), "id").toString());
+
+        GetIdResponse getIdResponse = new GetIdResponse();
+        getIdResponse.setId(id);
+
+        return getIdResponse;
     }
+
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getNameRequest")
     @ResponsePayload
-    public JAXBElement<GeneralResponse> getName(@RequestPayload JAXBElement<PokemonRequest> request) {
-        String name = iPokemonService.getInformation(request.getValue().getName().toLowerCase(), "name").toString();
-        GeneralResponse generalResponse= new GeneralResponse(200, "Consulta exitosa", name);
-        return createJaxbElement(generalResponse, GeneralResponse.class);
+    public GetNameResponse getName(@RequestPayload GetNameRequest request) {
+
+        String name = iPokemonService.getInformation(request.getName().toLowerCase(), "name").toString();
+
+        GetNameResponse getNameResponse = new GetNameResponse();
+        getNameResponse.setNamePokemon(name);
+
+        return getNameResponse;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getLocationAreaEncountersRequest")
     @ResponsePayload
-    public JAXBElement<GeneralResponse> getLocationAreaEncounters(@RequestPayload JAXBElement<PokemonRequest> request) {
-        String name = iPokemonService.getInformation(request.getValue().getName().toLowerCase(), "location_area_encounters").toString();
-        GeneralResponse generalResponse= new GeneralResponse(200, "Consulta exitosa", name);
-        return createJaxbElement(generalResponse, GeneralResponse.class);
+    public GetLocationAreaEncountersResponse getLocationAreaEncounters(@RequestPayload GetLocationAreaEncountersRequest request) {
+
+        List<String> locations = (List<String>) iPokemonService.getInformation(request.getName().toLowerCase(), "location_area_encounters");
+
+        GetLocationAreaEncountersResponse response = new GetLocationAreaEncountersResponse();
+
+        for (String location: locations){
+            response.getLocation().add(location);
+        }
+
+        return response;
     }
 
-    private <T> JAXBElement<T> createJaxbElement(T object, Class<T> clazz) {
-        return new JAXBElement<>(new QName(clazz.getSimpleName()), clazz, object);
-    }
 }

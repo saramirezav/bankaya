@@ -26,7 +26,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean(name = "pokemon")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema pokemonSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("PokemonsPort");
+        wsdl11Definition.setPortTypeName("PokemonPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://pokemon/challenge/bankaya-web-service");
         wsdl11Definition.setSchema(pokemonSchema);
@@ -34,7 +34,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     }
 
     @Bean
-    public XsdSchema countriesSchema() {
+    public XsdSchema pokemonSchema() {
         return new SimpleXsdSchema(new ClassPathResource("pokemon.xsd"));
     }
 }

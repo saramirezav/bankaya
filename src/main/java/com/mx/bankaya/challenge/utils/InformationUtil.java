@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class InformationUtil {
 
-    public String processInformation(String attribute, JSONArray jsonArray){
+    public List<String> processInformation(String attribute, JSONArray jsonArray){
 
         List<String> informacion = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class InformationUtil {
             throw new NoDataFoundException("No se encontro información de atributo " + attribute);
         }
 
-        return informacion.toString();
+        return informacion;
     }
 
 }

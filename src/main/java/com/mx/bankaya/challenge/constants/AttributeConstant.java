@@ -1,6 +1,13 @@
 package com.mx.bankaya.challenge.constants;
 
+/**
+ * Constants of the attributes that can be searched
+ * @author Sarahy Ramirez
+ */
  public class AttributeConstant {
+
+     private AttributeConstant() {
+     }
 
      public static final String ABILITIES = "abilities";
      public static final String HELD_ITEMS = "held_items";

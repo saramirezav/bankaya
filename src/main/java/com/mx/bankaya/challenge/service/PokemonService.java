@@ -11,6 +11,10 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/**
+ * Service that manages the Pokemon information
+ * @author Sarahy Ramirez
+ */
 @Service
 public class PokemonService implements IPokemonService{
 
@@ -23,6 +27,12 @@ public class PokemonService implements IPokemonService{
     @Autowired
     LocationAreaEncountersClient locationAreaEncountersClient;
 
+    /**
+     * Gets the information according to the attribute
+     * @param name
+     * @param information
+     * @return information (Object)
+     */
     public Object getInformation(String name, String information){
 
         JSONObject jsonObj = clientUtil.callService(name);
@@ -32,12 +42,12 @@ public class PokemonService implements IPokemonService{
                 List<String> abilities = informationUtil.processInformation("ability", jsonObj.getJSONArray(information));
                 return abilities;
             case AttributeConstant.HELD_ITEMS:
-                List<String> held_items = informationUtil.processInformation("item", jsonObj.getJSONArray(information));
-                return held_items;
+                List<String> heldItems = informationUtil.processInformation("item", jsonObj.getJSONArray(information));
+                return heldItems;
             case AttributeConstant.NAME:
                 return jsonObj.getJSONArray("forms").getJSONObject(0).get("name").toString();
             case AttributeConstant.LOCATION_AREA_ENCOUNTERS:
-                int id = Integer.valueOf(jsonObj.get("id").toString());
+                int id = Integer.parseInt(jsonObj.get("id").toString());
                 String locations = locationAreaEncountersClient.getLocations(id);
                 List<String> resultado = informationUtil.processInformation("location_area", new JSONArray(locations));
                 return resultado;

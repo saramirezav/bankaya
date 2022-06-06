@@ -8,9 +8,19 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that gets the information
+ * @author Sarahy Ramirez
+ */
 @Component
 public class InformationUtil {
 
+    /**
+     * Gets the information according to the attribute
+     * @param attribute
+     * @param jsonArray
+     * @return information
+     */
     public List<String> processInformation(String attribute, JSONArray jsonArray){
 
         List<String> informacion = new ArrayList<>();

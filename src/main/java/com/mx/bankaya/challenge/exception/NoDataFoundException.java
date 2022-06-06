@@ -6,6 +6,10 @@ import lombok.ToString;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Class that manages NoDataFoundException
+ * @author Sarahy Ramirez
+ */
 @Setter
 @Getter
 @ToString
@@ -16,5 +20,5 @@ public class NoDataFoundException extends RuntimeException {
         this.mensaje = mensaje;
     }
 
-    private String mensaje;
+    private final String mensaje;
 }

@@ -10,6 +10,10 @@ import pokemon.challenge.bankaya_web_service.*;
 
 import java.util.List;
 
+/**
+ * Pokemon API Controller
+ * @author Sarahy Ramirez
+ */
 @Endpoint
 public class PokemonController {
 
@@ -18,6 +22,11 @@ public class PokemonController {
     @Autowired
     IPokemonService iPokemonService;
 
+    /**
+     * Gets Pokemon abilities
+     * @param request
+     * @return getAbilitiesResponse
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAbilitiesRequest")
     @ResponsePayload
     public GetAbilitiesResponse getAbilities(@RequestPayload GetAbilitiesRequest request) {
@@ -33,38 +42,53 @@ public class PokemonController {
         return getAbilitiesResponse;
     }
 
+    /**
+     * Gets Pokemon experience
+     * @param request
+     * @return getBaseExperienceResponse
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getBaseExperienceRequest")
     @ResponsePayload
     public GetBaseExperienceResponse getBaseExperience(@RequestPayload GetBaseExperienceRequest request) {
 
-        int base_experience = Integer.valueOf(iPokemonService.getInformation(request.getName().toLowerCase(), "base_experience").toString());
+        int baseExperience = Integer.parseInt(iPokemonService.getInformation(request.getName().toLowerCase(), "base_experience").toString());
 
         GetBaseExperienceResponse getBaseExperienceResponse = new GetBaseExperienceResponse();
-        getBaseExperienceResponse.setBaseExperience(base_experience);
+        getBaseExperienceResponse.setBaseExperience(baseExperience);
 
         return getBaseExperienceResponse;
     }
 
+    /**
+     * Gets Pokemon Held Items
+     * @param request
+     * @return getHeldItemsResponse
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getHeldItemsRequest")
     @ResponsePayload
     public GetHeldItemsResponse getHeldItems(@RequestPayload GetHeldItemsRequest request) {
 
-        List<String> held_items= (List<String>) iPokemonService.getInformation(request.getName().toLowerCase(), "held_items");
+        List<String> heldItems = (List<String>) iPokemonService.getInformation(request.getName().toLowerCase(), "held_items");
 
         GetHeldItemsResponse getHeldItemsResponse = new GetHeldItemsResponse();
 
-       for (String item: held_items) {
+       for (String item: heldItems) {
            getHeldItemsResponse.getHeldItem().add(item);
        }
 
         return getHeldItemsResponse;
     }
 
+    /**
+     * Gets Pokemon Id
+     * @param request
+     * @return getIdResponse
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getIdRequest")
     @ResponsePayload
     public GetIdResponse getId(@RequestPayload GetIdRequest request) {
 
-        int id = Integer.valueOf(iPokemonService.getInformation(request.getName().toLowerCase(), "id").toString());
+        int id = Integer.parseInt(iPokemonService.getInformation(request.getName().toLowerCase(), "id").toString());
 
         GetIdResponse getIdResponse = new GetIdResponse();
         getIdResponse.setId(id);
@@ -72,7 +96,11 @@ public class PokemonController {
         return getIdResponse;
     }
 
-
+    /**
+     * Gets Pokemon Name
+     * @param request
+     * @return getNameResponse
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getNameRequest")
     @ResponsePayload
     public GetNameResponse getName(@RequestPayload GetNameRequest request) {
@@ -85,6 +113,11 @@ public class PokemonController {
         return getNameResponse;
     }
 
+    /**
+     * Gets Pokemon Location Area Encounters
+     * @param request
+     * @return response
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getLocationAreaEncountersRequest")
     @ResponsePayload
     public GetLocationAreaEncountersResponse getLocationAreaEncounters(@RequestPayload GetLocationAreaEncountersRequest request) {

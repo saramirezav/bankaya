@@ -12,9 +12,19 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+/**
+ * Configuration Class that receives the SOAP request
+ * @author Sarahy Ramirez
+ */
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
+
+    /**
+     * Handles SOAP request
+     * @param applicationContext
+     * @return servlet
+     */
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -23,6 +33,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
 
+    /**
+     * Exposes a standard WSDL 1.1 using an XsdSchema
+     * @param pokemonSchema
+     * @return wsdl11Definition
+     */
     @Bean(name = "pokemon")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema pokemonSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -33,6 +48,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return wsdl11Definition;
     }
 
+    /**
+     * Creates a XsdSchema
+     * @return XsdSchema
+     */
     @Bean
     public XsdSchema pokemonSchema() {
         return new SimpleXsdSchema(new ClassPathResource("pokemon.xsd"));
